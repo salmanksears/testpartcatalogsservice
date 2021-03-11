@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://services.hspartcatalog.searshc.com/domain/cache" version="1.0">
+
+  <xs:complexType name="item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="itemId" type="xs:string"/>
+      <xs:element minOccurs="0" name="partNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="productGroupId" type="xs:string"/>
+      <xs:element minOccurs="0" name="productGroupName" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemImageUrl" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemAvailabilityStatus" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemSellingPrice" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemAccessoryIndicator" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemDisclosure" type="xs:string"/>
+      <xs:element minOccurs="0" name="hazardousMaterialCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="productIndicator" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemComment" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemCondition" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemSuggestedQty" type="xs:string"/>
+      <xs:element minOccurs="0" name="subbedFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="upcCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemSynonymName" type="xs:string"/>
+      <xs:element minOccurs="0" name="engineModelFlag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

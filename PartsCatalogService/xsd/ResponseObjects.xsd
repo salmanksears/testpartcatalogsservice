@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:ns1="http://services.hspartcatalog.searshc.com/domain/" xmlns:ns2="http://vo.services.hspartcatalog.searshc.com/base/" xmlns:ns3="http://services.hspartcatalog.searshc.com/domain/cache" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://vo.services.hspartcatalog.searshc.com/response/" version="1.0">
+
+  <xs:import namespace="http://services.hspartcatalog.searshc.com/domain/" schemaLocation="DomainObjects.xsd"/>
+
+  <xs:import namespace="http://vo.services.hspartcatalog.searshc.com/base/" schemaLocation="BaseResponse.xsd"/>
+
+  <xs:import namespace="http://services.hspartcatalog.searshc.com/domain/cache" schemaLocation="DomainObjectsCache.xsd"/>
+
+<xs:element name="getItemDetailsResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="item" type="ns1:item"/>
+          <xs:element minOccurs="0" name="itemSchematics">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="itemSchematic" type="ns1:schematic"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="itemAttributes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="itemAttribute" type="ns1:itemAttribute"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="itemRestrictions">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="itemRestriction" type="ns1:itemRestriction"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="getModelsForItemResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="models">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="model" type="ns1:model"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="getModelListResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="models">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="model" type="ns1:model"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="getBrandListResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="brands">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="brand" type="ns1:brand"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="getModelDetailsResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="model" type="ns1:model"/>
+          <xs:element minOccurs="0" name="items">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="ns1:item"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+		  <xs:element minOccurs="0" name="modelSchematics">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="modelSchematic" type="ns1:schematic"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  </xs:element>
+
+<xs:element name="getProductGroupListResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="productGroups">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="productGroup" type="ns1:productGroup"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="itemSearchResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="items">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="ns1:item"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="getSchematicsResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="schematics">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="schematic" type="ns1:schematic"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="modelSearchResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="models">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="model" type="ns1:model"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="fullSearchResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="models">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="model" type="ns1:model"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="items">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="ns1:item"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  </xs:element>
+
+<xs:element name="getParentProductTypeListResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="parentProductTypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="parentProductType" type="ns1:parentProductType"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="getItemListResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="items">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="ns3:item"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="getBrandsResponse">
+  <xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="ns2:BaseResponse">
+        <xs:sequence>
+          <xs:element name="numFound" type="xs:string"/>
+          <xs:element minOccurs="0" name="brands">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="brand" type="ns1:brand"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  </xs:element>
+</xs:schema>

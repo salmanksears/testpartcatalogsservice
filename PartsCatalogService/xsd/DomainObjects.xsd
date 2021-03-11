@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://services.hspartcatalog.searshc.com/domain/" version="1.0">
+
+  <xs:complexType name="schematic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="schematicId" type="xs:string"/>
+      <xs:element minOccurs="0" name="schematicName" type="xs:string"/>
+      <xs:element minOccurs="0" name="schematicURL" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="brand">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="brandId" type="xs:string"/>
+      <xs:element minOccurs="0" name="brandName" type="xs:string"/>
+      <xs:element minOccurs="0" name="modelCount" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="item">
+    <xs:sequence>
+    	<xs:element minOccurs="0" name="itemId" type="xs:string" />
+    	<xs:element minOccurs="0" name="partNo" type="xs:string" />
+    	<xs:element minOccurs="0" name="productGroupId"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="productGroupName"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="itemDescription"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="itemImageUrl" type="xs:string" />
+    	<xs:element minOccurs="0" name="itemAvailabilityStatus"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="itemSellingPrice"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="itemAccessoryIndicator"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="itemDisclosure"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="hazardousMaterialCode"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="productIndicator"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="itemComment" type="xs:string" />
+    	<xs:element minOccurs="0" name="itemCondition" type="xs:string" />
+    	<xs:element minOccurs="0" name="itemSuggestedQty"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subbedFlag" type="xs:string" />
+    	<xs:element minOccurs="0" name="upcCode" type="xs:string" />
+    	<xs:element minOccurs="0" name="itemSynonymName"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="engineModelFlag"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemId" type="xs:string" />
+    	<xs:element minOccurs="0" name="subPartNo" type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemDescription"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subProductGroupId"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subProductGroupName"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemImageURL"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemAvailabilityStatus"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemSellingPrice"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemAccessoryIndicator"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemDisclosure"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subHazardousMaterialCode"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subProductIndicator"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemComment"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemCondition"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subItemSuggestedQty"
+    		type="xs:string" />
+    	<xs:element minOccurs="0" name="subUPCcode" type="xs:string" />
+    	<xs:element minOccurs="0" name="itemModelId" type="xs:string"  />
+    	<xs:element minOccurs="0" name="itemSchematicId" type="xs:string"  />
+    	<xs:element minOccurs="0" name="itemKeyId" type="xs:string"  />
+    	
+    	<xs:element name="itemAttributes" minOccurs="0">
+    		<xs:complexType>
+    			<xs:sequence>
+    				<xs:element name="itemAttribute" type="xs:string"
+    					minOccurs="0" maxOccurs="unbounded" />
+    			</xs:sequence>
+    		</xs:complexType>
+    	</xs:element>
+    	<xs:element name="itemRestrictions" minOccurs="0">
+    		<xs:complexType>
+    			<xs:sequence>
+    				<xs:element name="itemRestriction" type="xs:string"
+    					minOccurs="0" maxOccurs="unbounded" />
+    			</xs:sequence>
+    		</xs:complexType>
+    	</xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemAttribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="itemAttributeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="attributeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="attributeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="attributeValue" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemRestriction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="itemRestrictionId" type="xs:string"/>
+      <xs:element minOccurs="0" name="restrictionId" type="xs:string"/>
+      <xs:element minOccurs="0" name="restrictionTypeCd" type="xs:string"/>
+      <xs:element minOccurs="0" name="restrictionDescription" type="xs:string"/>
+	  <xs:element minOccurs="0" name="restrictionStates" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="model">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="modelId" type="xs:string"/>
+      <xs:element minOccurs="0" name="modelNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="modelDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="brandId" type="xs:string"/>
+      <xs:element minOccurs="0" name="brand" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentProductTypeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentProductTypeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="productTypeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="productTypeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="subProductTypeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="subProductTypeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="modelDiagramCount" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemCount" type="xs:string"/>
+      <xs:element minOccurs="0" name="ownerManualURL" type="xs:string"/>
+      <xs:element minOccurs="0" name="installationManualURL" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="productGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="productGroupId" type="xs:string"/>
+      <xs:element minOccurs="0" name="productGroupName" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemCount" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="parentProductType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="parentProductTypeId" type="xs:string"/>
+      <xs:element minOccurs="0" name="parentProductTypeName" type="xs:string"/>
+      <xs:element minOccurs="0" name="modelCount" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

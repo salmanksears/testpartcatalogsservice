@@ -1,0 +1,97 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="false">
+
+	<import resource="classpath:applicationContextTest-mybatis.xml" />
+	<import resource="classpath:applicationContextTest-ehCache.xml" />
+	
+	<context:component-scan base-package="com.searshc.hspartcatalog" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<bean id="validatorContainer" class="com.searshc.hspartcatalog.validator.ValidatorContainer">
+		<property name="validatorMap">
+			<map>
+				<entry key="ItemSearchRequestValidator" value-ref="itemSearchRequestValidator" />
+				<entry key="ModelSearchRequestValidator" value-ref="modelSearchRequestValidator" />
+				<entry key="GetBrandsRequestValidator" value-ref="getBrandsRequestValidator" />
+				<entry key="FullSearchRequestValidator" value-ref="fullSearchRequestValidator" />
+				<entry key="GetSchematicsRequestValidator" value-ref="getSchematicsRequestValidator" />
+				<entry key="GetModelDetailsRequestValidator" value-ref="getModelDetailsRequestValidator" />
+				<entry key="GetModelsForItemRequestValidator" value-ref="getModelsForItemRequestValidator" />
+				<entry key="GetItemDetailsRequestValidator" value-ref="getItemDetailsRequestValidator" />
+				
+				<entry key="GetItemListRequestValidator" value-ref="getItemListRequestValidator" />
+				<entry key="GetModelListRequestValidator" value-ref="getModelListRequestValidator" />
+				<entry key="GetBrandListRequestValidator" value-ref="getBrandListRequestValidator" />
+				<entry key="GetParentProductTypeListRequestValidator" value-ref="getParentProductTypeListRequestValidator" />
+				<entry key="GetProductGroupListRequestValidator" value-ref="getProductGroupListRequestValidator" />
+				<entry key="AccessoryRequestValidator" value-ref="accessoryRequestValidator" />
+				
+			</map>
+		</property>
+	</bean>
+
+	<bean id="itemSearchRequestValidator" class="com.searshc.hspartcatalog.validator.ItemSearchRequestValidator"/>
+	
+	<bean id="modelSearchRequestValidator" class="com.searshc.hspartcatalog.validator.ModelSearchRequestValidator"/>
+	
+	<bean id="getBrandsRequestValidator" class="com.searshc.hspartcatalog.validator.GetBrandsRequestValidator"/>
+	
+	<bean id="fullSearchRequestValidator" class="com.searshc.hspartcatalog.validator.FullSearchRequestValidator"/>
+	
+	<bean id="getModelDetailsRequestValidator" class="com.searshc.hspartcatalog.validator.GetModelDetailsRequestValidator"/>
+	
+	<bean id="getSchematicsRequestValidator" class="com.searshc.hspartcatalog.validator.GetSchematicsRequestValidator"/>
+	
+	<bean id="getModelsForItemRequestValidator" class="com.searshc.hspartcatalog.validator.GetModelsForItemRequestValidator"/>
+	
+	<bean id="getItemDetailsRequestValidator" class="com.searshc.hspartcatalog.validator.GetItemDetailsRequestValidator"/>
+	
+	<bean id="getItemListRequestValidator" class="com.searshc.hspartcatalog.validator.GetItemListRequestValidator"/>
+	
+	<bean id="getModelListRequestValidator" class="com.searshc.hspartcatalog.validator.GetModelListRequestValidator"/>
+	
+	<bean id="getBrandListRequestValidator" class="com.searshc.hspartcatalog.validator.GetBrandListRequestValidator"/>
+	
+	<bean id="getParentProductTypeListRequestValidator" class="com.searshc.hspartcatalog.validator.GetParentProductTypeListRequestValidator"/>
+	
+	<bean id="getProductGroupListRequestValidator" class="com.searshc.hspartcatalog.validator.GetProductGroupListRequestValidator"/>
+	
+	<bean id="accessoryRequestValidator" class="com.searshc.hspartcatalog.validator.AccessoryRequestValidator"/>
+	
+	<bean id="getCoreAndEnvChargeValidator" class="com.searshc.hspartcatalog.validator.GetCoreAndEnvChargeValidator"/>
+	
+	<bean id="clientConfigBO" class="com.searshc.hspartcatalog.services.bo.ClientConfigBO"/>
+	
+	<bean id="solrServiceInvokerBO" class="com.searshc.hspartcatalog.services.bo.SolrServiceInvokerBO"/>
+	
+	<bean id="entityDocMapper" class="com.searshc.hspartcatalog.mapper.EntityDocMapper"/>
+	
+	<!-- TASK ADD  -->
+	<bean id="applicationContextUtils" class="com.searshc.hspartcatalog.util.ApplicationContextUtils"></bean>
+ 	<bean id="solrConnection" class="com.searshc.hspartcatalog.services.bo.tasks.SolrConnection"/>
+	
+	<bean id="partsCatalogDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 		<property name="driverClassName" value="com.informix.jdbc.IfxDriver" />
+		<!-- <property name="url" value="jdbc:informix-sqli://hawaii.sears.com:1525/lis0d000d:INFORMIXSERVER=ifmx00289_tcp" />  -->
+		<property name="url" value="jdbc:informix-sqli://ifmxprddb.searshc.com:1552/lis0d000d:informixserver=partstg1_tcp" />
+		<!-- <property name="username" value="solrapp" /> 
+		<property name="password" value="s0lrapp1" /> -->
+		<property name="username" value="pdrp" />
+		<property name="password" value="parts456" />
+	</bean>
+	<bean id="partsCatalogDao" class="com.searshc.hspartcatalog.services.dao.PartsCatalogDao">
+	  	<property name="dataSource" ref="partsCatalogDataSource" />
+	</bean>
+	
+	<bean id="partsCatalogService" class="com.searshc.hspartcatalog.services.service.impl.PartsCatalogServiceImpl"/>
+    
+</beans>

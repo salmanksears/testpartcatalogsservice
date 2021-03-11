@@ -1,0 +1,229 @@
+<?xml version="1.0" ?>    
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<schema name="partcatalog" version="1.1">
+  <types>
+   <fieldtype name="string"  class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+   <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+   <fieldType name="uuid" class="solr.UUIDField" indexed="true" />
+   <fieldType name="date" class="solr.DateField" sortMissingLast="true" omitNorms="true"/>
+   
+      <fieldType name="text_exact" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.TrimFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>       
+     </analyzer>
+    </fieldType>
+    <!-- ADD -->
+   <fieldType name="text_en" class="solr.TextField"
+           positionIncrementGap="100">
+           <analyzer type="index">
+                   <tokenizer class="solr.StandardTokenizerFactory" />
+                   <!-- in this example, we will only use synonyms at query time <filter class="solr.SynonymFilterFactory"
+                        synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/> -->
+                   <!-- Case insensitive stop word removal. -->
+                   <filter class="solr.StopFilterFactory" ignoreCase="true"
+                                   words="lang/stopwords_en.txt" />
+                   <filter class="solr.LowerCaseFilterFactory" />
+                   <filter class="solr.EnglishPossessiveFilterFactory" />
+                   <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt" />
+                   <!-- Optionally you may want to use this less aggressive stemmer instead
+                        of PorterStemFilterFactory: <filter class="solr.EnglishMinimalStemFilterFactory"/> -->
+                   <filter class="solr.PorterStemFilterFactory" />
+           </analyzer>
+           <analyzer type="query">
+                   <tokenizer class="solr.StandardTokenizerFactory" />
+                   <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt"
+                                   ignoreCase="true" expand="true" />
+                   <filter class="solr.StopFilterFactory" ignoreCase="true"
+                                   words="lang/stopwords_en.txt" />
+                   <filter class="solr.LowerCaseFilterFactory" />
+                   <filter class="solr.EnglishPossessiveFilterFactory" />
+                   <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt" />
+                   <!-- Optionally you may want to use this less aggressive stemmer instead
+                        of PorterStemFilterFactory: <filter class="solr.EnglishMinimalStemFilterFactory"/> -->
+                   <filter class="solr.PorterStemFilterFactory" />
+           </analyzer>
+   </fieldType>
+   <fieldType name="text_en_splitting" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+       	<tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.TrimFilterFactory"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true"/>
+        <filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="30" side="front"/>
+     	<filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0" catenateWords="0" catenateNumbers="0" catenateAll="1" splitOnCaseChange="0" preserveOriginal="1"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.TrimFilterFactory"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true"/>
+   	    <filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0" catenateWords="0" catenateNumbers="0" catenateAll="1" splitOnCaseChange="0" preserveOriginal="1"/>
+       <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+  </types>
+
+
+ <fields>    
+ <!-- common fields -->
+   <field name="id" type="string"  indexed="true"  stored="true"  multiValued="false" required="true"/>  
+   <field name="_version_" type="long" indexed="true"  stored="true" multiValued="false" /> 
+   <field name="versionDate"  type="date"  default="NOW"  indexed="true"  stored="true"  multiValued="false" />
+    
+   <!-- fields for schematic data -->
+
+   <field name="schematicId"            type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="schematicDescription"   type="text_exact"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="schematicURL"           type="string"     indexed="true"  stored="true"  multiValued="false" />   
+
+    <!-- fields for attribute data -->
+   <field name="itemAttributeId"        type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="attributeId"            type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="attributeName"          type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="attributeValue"         type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+
+    <!-- fields for restriction data -->
+   <field name="itemRestrictionId"      type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="restrictionId"          type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="restrictionTypeCd"      type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="restrictionDescription" type="text_exact" indexed="true"  stored="true"  multiValued="false" />  
+   <field name="restrictionStates"      type="text_exact" indexed="true"  stored="true"  multiValued="false" />  
+
+    <!-- fields for item data -->
+   <field name="itemId"                 type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="formattedItemId"        type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="productGroupIdPls"      type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="partNo"                 type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="formattedPartNo"        type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemDescription"        type="text_en"    indexed="true"  stored="true"  multiValued="false" />
+   <field name="productGroupId"         type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="productGroupName"       type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemImageURL"           type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemAvailabilityStatus" type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemSellingPrice"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemAccessoryIndicator" type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemDisclosure"         type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="hazardousMaterialCode"  type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="productIndicator"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemComment"            type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemCondition"          type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemSuggestedQty"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="upcCode"                type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemSynonynName"        type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="engineModelFlag"        type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subbedFlag"             type="string"     indexed="true"  stored="true"  multiValued="false" />
+  
+    <!-- fields for item sub data -->
+   <field name="subItemId"                 type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="subFormattedItemId"        type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="subProductGroupIdPls"      type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="subPartNo"                 type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="subFormattedPartNo"        type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemDescription"        type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subProductGroupId"         type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subProductGroupName"       type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemImageURL"           type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemAvailabilityStatus" type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemSellingPrice"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemAccessoryIndicator" type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemDisclosure"         type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subHazardousMaterialCode"  type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subProductIndicator"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemComment"            type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemCondition"          type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemSuggestedQty"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subUPCcode"                type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subItemSynonynName"        type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subEngineModelFlag"        type="string"     indexed="true"  stored="true"  multiValued="false" />
+  
+   <!-- fields for item relationships -->
+   <field name="itemSchematics"         type="string"     indexed="true"  stored="true"  multiValued="true" />
+   <field name="itemAttributes"         type="string"     indexed="true"  stored="true"  multiValued="true" />
+   <field name="itemRestrictions"       type="string"     indexed="true"  stored="true"  multiValued="true" />
+
+   <!-- fields for model data -->
+   <field name="modelId"                type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="formattedModelId"       type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="modelNo"                type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="formattedModelNo"       type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="modelDescription"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="brandId"                type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="brand"                  type="text_en"    indexed="true"  stored="true"  multiValued="false" />
+   <field name="parentProductTypeId"    type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="parentProductTypeName"  type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="productTypeId"          type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="productTypeName"        type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="subProductTypeId"       type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="subProductTypeName"     type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="modelDiagramCount"      type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemCount"              type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="ownersManualURL"        type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="installationManualURL"  type="string"     indexed="true"  stored="true"  multiValued="false" />
+   <field name="modelNoEnhancedSearch"  type="text_en_splitting" indexed="true"  stored="true"  multiValued="false" />
+  
+   
+   <!-- fields for model relationships -->
+   <field name="modelSchematics"        type="string"     indexed="true"  stored="true"  multiValued="true" />   
+   
+   <!-- fields for model and part relationship -->
+   <field name="itemModelId"               type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemSchematicId"           type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+   <field name="itemKeyId"                 type="text_exact" indexed="true"  stored="true"  multiValued="false" />
+     
+   <field name="adTag" type="text_en" indexed="true" stored="true" multiValued="false" />
+   <field name="partDescriptionClust" type="text_en" indexed="true" stored="true" multiValued="true" />
+
+    <!-- fields for Sears Product Identification Network (SPIN) reference data -->
+   <field name="spinModelDivItemSku" type="text_exact" indexed="true" stored="true" multiValued="false"/>
+   <field name="spinModelPlsItem" type="text_exact" indexed="true" stored="true" multiValued="false"/>
+   <field name="spinModelCoreItemNumber" type="text_exact" indexed="true" stored="true" multiValued="false"/>
+   <field name="spinModelVendorStockNumber" type="text_exact" indexed="true" stored="true" multiValued="false"/>
+   <field name="spinModelManufacturerModelNumber" type="text_exact" indexed="true" stored="true" multiValued="false"/>
+   <field name="spinModelUpc" type="text_exact" indexed="true" stored="true" multiValued="false"/>
+   <field name="spinBrandName" type="text_en"   indexed="true" stored="true" multiValued="false"/>
+   <field name="catchAllSpin" type="text_exact" indexed="true" stored="true" multiValued="true"/>
+   
+ 
+ 
+ 
+ 
+   <copyField source="itemDescription" dest="partDescriptionClust" />
+   <copyField source="adTag" dest="partDescriptionClust" />
+   
+   <copyField source="spinModel*" dest="catchAllSpin"/>
+   <copyField source="modelNo" dest="modelNoEnhancedSearch"/>
+ 
+
+</fields>
+
+ <!-- field to use to determine and enforce document uniqueness. -->
+ <uniqueKey>id</uniqueKey>
+
+ <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+ <defaultSearchField>partNo</defaultSearchField>
+
+ <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+ <solrQueryParser defaultOperator="OR"/>
+</schema>
+
